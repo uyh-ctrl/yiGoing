@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import java.util.Date;
  * Created by macro on 2018/5/17.
  */
 @Service
+@ConditionalOnProperty(name = "easygoing.oss.enabled", havingValue = "true")
 public class OssServiceImpl implements OssService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OssServiceImpl.class);

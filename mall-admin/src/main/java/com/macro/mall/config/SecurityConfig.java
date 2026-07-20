@@ -66,8 +66,8 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions -> exceptions.accessDeniedHandler(accessDeniedHandler)
                         .authenticationEntryPoint(authenticationEntryPoint))
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(redisRateLimitFilter, JwtAuthenticationTokenFilter.class)
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(redisRateLimitFilter, JwtAuthenticationTokenFilter.class)
                 .build();
     }
 

@@ -50,3 +50,5 @@ springdoc:
 easygoing:
   ai:
     enabled: ${EASYGOING_AI_ENABLED:false}
+  oss:
+    enabled: ${EASYGOING_OSS_ENABLED:false}

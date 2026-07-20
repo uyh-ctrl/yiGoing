@@ -4,11 +4,13 @@ import com.aliyun.oss.OSSClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
  * Created by macro on 2018/5/17.
  */
 @Configuration
+@ConditionalOnProperty(name = "easygoing.oss.enabled", havingValue = "true")
 public class OssConfig {
     @Value("${aliyun.oss.endpoint}")
     private String ALIYUN_OSS_ENDPOINT;

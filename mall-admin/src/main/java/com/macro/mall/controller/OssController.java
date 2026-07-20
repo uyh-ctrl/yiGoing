@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 @Api(tags = "OssController", description = "Oss管理")
 @RequestMapping("/aliyun/oss")
+@ConditionalOnProperty(name = "easygoing.oss.enabled", havingValue = "true")
 public class OssController {
     @Autowired
     private OssServiceImpl ossService;

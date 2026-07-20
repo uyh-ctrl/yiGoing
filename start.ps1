@@ -29,7 +29,7 @@ if (-not (Test-ListeningPort 8080)) {
         if ($LASTEXITCODE -ne 0) { throw 'Backend build failed.' }
     }
     Start-Process -FilePath java -ArgumentList @('-jar', $jar, "--spring.profiles.active=$Profile") -WorkingDirectory $root -RedirectStandardOutput (Join-Path $logDir 'backend.out.log') -RedirectStandardError (Join-Path $logDir 'backend.err.log') -WindowStyle Hidden
-    if (-not (Wait-ListeningPort 8080 30)) { throw "Backend did not start. Check $logDir\backend.err.log" }
+    if (-not (Wait-ListeningPort 8080 90)) { throw "Backend did not start within 90 seconds. Check $logDir\backend.err.log" }
 }
 
 if (-not (Test-Path (Join-Path $frontend 'node_modules'))) {
@@ -38,6 +38,6 @@ if (-not (Test-Path (Join-Path $frontend 'node_modules'))) {
 }
 if (-not (Test-ListeningPort 5173)) {
     Start-Process -FilePath npm.cmd -ArgumentList @('run', 'dev', '--', '--host', '127.0.0.1') -WorkingDirectory $frontend -RedirectStandardOutput (Join-Path $logDir 'frontend.out.log') -RedirectStandardError (Join-Path $logDir 'frontend.err.log') -WindowStyle Hidden
-    if (-not (Wait-ListeningPort 5173 30)) { throw "Frontend did not start. Check $logDir\frontend.err.log" }
+    if (-not (Wait-ListeningPort 5173 60)) { throw "Frontend did not start within 60 seconds. Check $logDir\frontend.err.log" }
 }
 Write-Host 'Open http://127.0.0.1:5173' -ForegroundColor Green
