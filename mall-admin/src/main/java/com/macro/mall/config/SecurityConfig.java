@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/", "/favicon.ico",
                                 "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health").permitAll()
-                        .requestMatchers("/admin/login", "/admin/register").permitAll()
+                        .requestMatchers("/admin/login", "/admin/register", "/auth/login", "/auth/register").permitAll()
                         // Customer chat is intentionally public, but protected by RedisRateLimitFilter.
                         .requestMatchers(HttpMethod.POST, "/ai/customer-service/chat").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()

@@ -26,7 +26,8 @@ export const useUserStore = defineStore(
       userInfo.value.password = loginParam.password
       userInfo.value.accountType = res.data.accountType
       userInfo.value.avatar = res.data.avatar || ''
-      userInfo.value.username = res.data.displayName
+      // Keep the account name for route and permission checks. The API displayName
+      // may be a nickname (for example "系统管理员") rather than "admin".
       if (res.data.accountType === 'ADMIN') await getUserInfo()
     }
 
