@@ -1,209 +1,260 @@
-# mall
+# 易Going 商城平台
 
-<p>
-  <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
-  <a href="https://github.com/macrozheng/mall-learning"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B-mall--learning-green.svg" alt="学习教程"></a>
-  <a href="http://qm.qq.com/cgi-bin/qm/qr?k=V6xu5c12j9qhnMUNdDRzakNxRKzOxibQ"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/QQ%E7%BE%A4-959351312-red.svg" alt="QQ群"></a>
-  <a href="http://qm.qq.com/cgi-bin/qm/qr?k=M5Edq2TiJL_ShcOEeYjwcmdGmq4zZrd_"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/QQ%E7%BE%A4-553018255-red.svg" alt="QQ群"></a>
-  <a href="https://gitee.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
+易Going 是一个前后端分离的商城实践项目，包含运营后台、会员门户、商品搜索和智能客服原型。项目以真实电商业务链路为主线，覆盖商品管理、购物车、下单、库存锁定、优惠券、订单超时取消、权限管理与运营配置等能力。
+
+> 项目仍在持续完善。支付模块已完成安全收口、环境变量配置和渠道抽象；接入支付宝、微信支付真实交易前，需要配置商户证书、密钥和公网回调地址。
+
+## 项目亮点
+
+- **现代化技术栈**：后端升级至 Java 21 与 Spring Boot 3.5；管理端使用 Vue 3、TypeScript、Vite、Element Plus。
+- **完整交易骨架**：购物车确认、优惠计算、库存锁定、订单生成、延迟取消、库存释放均已具备。
+- **安全基础**：JWT 无状态认证、方法级权限控制、BCrypt 密码编码、Redis IP 限流、生产环境密钥外置。
+- **AI 客服原型**：基于 Spring AI 的检索增强问答链路，支持 OpenAI 兼容模型配置、向量检索和来源回传。
+- **可运维性**：OpenAPI 文档、Actuator 健康检查、统一环境变量模板、PowerShell 一键启动脚本。
+
+## 技术架构
+
+![易Going 技术架构图](document/resource/easygoing-architecture.svg)
+
+### 架构与开发流程参考
+
+<p align="center">
+  <img src="document/resource/mall_system_arch.png" alt="系统架构图" width="48%" />
+  <img src="document/resource/mall_business_arch.png" alt="业务架构图" width="48%" />
 </p>
 
-## 前言
-
-`mall`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
-
-## 特别赞助商
-
-<p align="left">
-<a href="https://coding.net/?utm_source=macrozheng&utm_medium=banner&utm_campaign=march2019" target="_blank">
-  <img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/coding.png" width=""/>
- </a>
+<p align="center">
+  <img src="document/resource/mall_dev_flow.png" alt="项目开发流程" width="70%" />
 </p>
 
-## 项目介绍
+<p align="center">
+  <img src="document/resource/mall_dev_flow_note.png" alt="项目开发流程说明" width="70%" />
+</p>
 
-`mall`项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现。
-前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。
-后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。
+### 后端技术
 
-### 项目演示
+| 分类 | 技术 |
+| --- | --- |
+| 基础框架 | Java 21、Spring Boot 3.5、Spring MVC、Spring AOP |
+| 安全 | Spring Security、JWT、BCrypt、方法级 `@PreAuthorize` |
+| 数据访问 | MyBatis、MyBatis Generator、PageHelper、MySQL、Druid |
+| 中间件 | Redis、RabbitMQ、MongoDB、Elasticsearch 7.17 |
+| AI | Spring AI、OpenAI 兼容接口、ChatClient、VectorStore |
+| 运维 | Actuator、Springdoc OpenAPI、Logback、Docker（部署基础） |
 
-#### 后台管理系统
+### 前端技术
 
-前端项目`mall-admin-web`地址：https://github.com/macrozheng/mall-admin-web
+Vue 3、TypeScript、Vite、Vue Router、Pinia、Element Plus、Axios、ECharts、TinyMCE。
 
-项目演示地址： [http://39.98.190.128/index.html](http://39.98.190.128/index.html)  
+## 业务能力
 
-![后台管理系统功能演示.gif](/document/resource/mall-admin.gif)
+### 运营后台 `mall-admin`
 
-#### 前台商城系统
+- 商品中心：分类、品牌、属性、SKU 库存、商品新增与编辑。
+- 订单中心：订单查询、发货、售后申请、退货原因与订单设置。
+- 营销中心：秒杀、优惠券、首页品牌/新品/人气商品/广告配置。
+- 权限中心：管理员、角色、菜单、资源与接口级授权。
+- 内容与媒体：专题、优选、OSS 上传策略。
+- 智能客服：客服试聊界面与基于知识库检索的受控回答原型。
 
-前端项目`mall-app-web`地址：敬请期待......
+### 会员门户 `mall-portal`
 
-项目演示地址：[http://39.98.190.128/mall-app/mainpage.html](http://39.98.190.128/mall-app/mainpage.html)
+- 会员注册、登录、地址管理。
+- 购物车、确认订单、优惠券、积分抵扣与促销金额计算。
+- 订单创建、SKU 锁库存、订单号生成、订单超时取消与库存释放。
+- 关注品牌、收藏商品、浏览历史等会员行为数据。
+- 订单退货申请。
 
-![前台商城系统功能演示.gif](/document/resource/mall-app.gif)
+### 商品搜索 `mall-search`
 
-### 组织结构
+- 商品索引导入、全文关键词检索。
+- 品牌、分类和属性聚合筛选。
+- 新品、销量、价格等排序能力。
 
-``` lua
-mall
-├── mall-common -- 工具类及通用代码
-├── mall-mbg -- MyBatisGenerator生成的数据库操作代码
-├── mall-admin -- 后台商城管理系统接口
-├── mall-search -- 基于Elasticsearch的商品搜索系统
-├── mall-portal -- 前台商城系统接口
-└── mall-demo -- 框架搭建时的测试代码
+## 项目演示
+
+<p align="center">
+  <img src="document/resource/mall-admin.gif" alt="商城运营后台演示" width="48%" />
+  <img src="document/resource/mall-app.gif" alt="商城门户演示" width="48%" />
+</p>
+
+## 业务功能图
+
+### 商品、订单与营销
+
+<p align="center">
+  <img src="document/resource/mind_product.jpg" alt="商品功能图" width="31%" />
+  <img src="document/resource/mind_order.jpg" alt="订单功能图" width="31%" />
+  <img src="document/resource/mind_sale.jpg" alt="营销功能图" width="31%" />
+</p>
+
+### 内容、会员与门户
+
+<p align="center">
+  <img src="document/resource/mind_content.jpg" alt="内容功能图" width="31%" />
+  <img src="document/resource/mind_member.jpg" alt="会员功能图" width="31%" />
+  <img src="document/resource/mind_portal.jpg" alt="门户功能图" width="31%" />
+</p>
+
+## 订单与支付流程
+
+```text
+购物车
+  │
+  ├─ 确认商品、地址、优惠券、积分
+  ├─ 校验可用库存
+  ├─ 创建待支付订单 + 锁定 SKU 库存
+  ├─ 发送 RabbitMQ 延迟取消消息
+  │
+  ├─ 支付渠道创建交易（支付宝 Page Pay / 微信 Native）
+  │      └─ 验签回调、金额校验、幂等更新（接入商户凭据后启用）
+  │
+  └─ 支付成功：订单转待发货、扣减真实库存
+
+超时未支付
+  └─ 订单关闭、释放锁定库存、返还优惠券与积分
 ```
 
-### 技术选型
+为避免浏览器伪造支付结果，生产环境默认关闭 `/order/paySuccess` 的手工确认；本地沙箱调试可设置 `EASYGOING_PAYMENT_ALLOW_MANUAL_CONFIRMATION=true`。
 
-#### 后端技术
+## 目录结构
 
-技术 | 说明 | 官网
-----|----|----
-Spring Boot | 容器+MVC框架 | [https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
-Spring Security | 认证和授权框架 | [https://spring.io/projects/spring-security](https://spring.io/projects/spring-security)
-MyBatis | ORM框架  | [http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)
-MyBatisGenerator | 数据层代码生成 | [http://www.mybatis.org/generator/index.html](http://www.mybatis.org/generator/index.html)
-PageHelper | MyBatis物理分页插件 | [http://git.oschina.net/free/Mybatis_PageHelper](http://git.oschina.net/free/Mybatis_PageHelper)
-Swagger-UI | 文档生产工具 | [https://github.com/swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui)
-Hibernator-Validator | 验证框架 | [http://hibernate.org/validator/](http://hibernate.org/validator/)
-Elasticsearch | 搜索引擎 | [https://github.com/elastic/elasticsearch](https://github.com/elastic/elasticsearch)
-RabbitMq | 消息队列 | [https://www.rabbitmq.com/](https://www.rabbitmq.com/)
-Redis | 分布式缓存 | [https://redis.io/](https://redis.io/)
-MongoDb | NoSql数据库 | [https://www.mongodb.com/](https://www.mongodb.com/)
-Docker | 应用容器引擎 | [https://www.docker.com/](https://www.docker.com/)
-Druid | 数据库连接池 | [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
-OSS | 对象存储 | [https://github.com/aliyun/aliyun-oss-java-sdk](https://github.com/aliyun/aliyun-oss-java-sdk)
-JWT | JWT登录支持 | [https://github.com/jwtk/jjwt](https://github.com/jwtk/jjwt)
-LogStash | 日志收集 | [https://github.com/logstash/logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder)
-Lombok | 简化对象封装工具 | [https://github.com/rzwitserloot/lombok](https://github.com/rzwitserloot/lombok)
+```text
+mall/
+├── mall-admin/             # 运营后台服务
+├── mall-portal/            # 会员门户与交易服务
+├── mall-search/            # 商品搜索服务
+├── mall-admin-web/         # Vue 3 运营管理前端
+├── mall-common/            # 通用返回、异常、工具类
+├── mall-mbg/               # MyBatis Generator 生成的模型与 Mapper
+├── mall-demo/              # 示例模块
+├── document/
+│   ├── sql/mall.sql        # 初始化数据库脚本
+│   └── reference/          # 部署、支付等说明文档
+├── .env.example            # 外部服务与密钥模板
+└── pom.xml                 # Maven 聚合工程
+```
 
-#### 前端技术
+前端工程 `mall-admin-web/` 已与后端源码一并纳入本仓库。
 
-技术 | 说明 | 官网
-----|----|----
-Vue | 前端框架 | [https://vuejs.org/](https://vuejs.org/)
-Vue-router | 路由框架 | [https://router.vuejs.org/](https://router.vuejs.org/)
-Vuex | 全局状态管理框架 | [https://vuex.vuejs.org/](https://vuex.vuejs.org/)
-Element | 前端UI框架 | [https://element.eleme.io/](https://element.eleme.io/)
-Axios | 前端HTTP框架 | [https://github.com/axios/axios](https://github.com/axios/axios)
-v-charts | 基于Echarts的图表框架 | [https://v-charts.js.org/](https://v-charts.js.org/)
-Js-cookie | cookie管理工具 | [https://github.com/js-cookie/js-cookie](https://github.com/js-cookie/js-cookie)
-nprogress | 进度条控件 | [https://github.com/rstacruz/nprogress](https://github.com/rstacruz/nprogress)
+## 快速开始
 
-#### 架构图
+### 1. 前置条件
 
-##### 系统架构图
+- JDK 21
+- Node.js 20+
+- MySQL 8（导入 `document/sql/mall.sql`）
+- Redis
+- 门户完整运行还需 RabbitMQ、MongoDB；搜索服务还需 Elasticsearch 7.17。
 
-![系统架构图](document/resource/mall_system_arch.png)
+### 2. 配置环境变量
 
-##### 业务架构图
+复制 [`.env.example`](.env.example) 为本地 `.env` 或在 IDE / 部署平台设置同名环境变量。
 
-![系统架构图](document/resource/mall_business_arch.png)
+生产环境至少应设置：
 
-#### 模块介绍
+```bash
+EASYGOING_JWT_SECRET=replace-with-a-random-secret
+EASYGOING_DB_URL=jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+EASYGOING_DB_USERNAME=mall_app
+EASYGOING_DB_PASSWORD=replace-with-db-password
+```
 
-##### 后台管理系统 `mall-admin`
+支付相关变量见 [支付与生产环境配置](document/reference/payment-setup.md)。
 
-- 商品管理：[功能结构图-商品.jpg](document/resource/mind_product.jpg)
-- 订单管理：[功能结构图-订单.jpg](document/resource/mind_order.jpg)
-- 促销管理：[功能结构图-促销.jpg](document/resource/mind_sale.jpg)
-- 内容管理：[功能结构图-内容.jpg](document/resource/mind_content.jpg)
-- 用户管理：[功能结构图-用户.jpg](document/resource/mind_member.jpg)
+### 3. 构建后端
 
-##### 前台商城系统 `mall-portal`
+Windows 下可从 `mall-portal` 目录使用 Maven Wrapper 构建聚合工程：
 
-[功能结构图-前台.jpg](document/resource/mind_portal.jpg)
+```powershell
+cd mall-portal
+.\mvnw.cmd -f ..\pom.xml -pl mall-admin -am -DskipTests package
+.\mvnw.cmd -f ..\pom.xml -pl mall-portal -am -DskipTests package
+```
 
-#### 开发进度
+### 4. 启动服务
 
-![项目开发进度图](document/resource/mall_dev_flow.png)
+在仓库根目录执行：
 
-## 环境搭建
+```powershell
+.\start.ps1
+```
 
-### 开发工具
+默认启动管理端和前端。也可以分别运行应用启动类：
 
-工具 | 说明 | 官网
-----|----|----
-IDEA | 开发IDE | https://www.jetbrains.com/idea/download
-RedisDesktop | redis客户端连接工具 | https://redisdesktop.com/download
-Robomongo | mongo客户端连接工具 | https://robomongo.org/download
-SwitchHosts| 本地host管理 | https://oldj.github.io/SwitchHosts/
-X-shell | Linux远程连接工具 | http://www.netsarang.com/download/software.html
-Navicat | 数据库连接工具 | http://www.formysql.com/xiazai.html
-PowerDesigner | 数据库设计工具 | http://powerdesigner.de/
-Axure | 原型设计工具 | https://www.axure.com/
-MindMaster | 思维导图设计工具 | http://www.edrawsoft.cn/mindmaster
-ScreenToGif | gif录制工具 | https://www.screentogif.com/
-ProcessOn | 流程图绘制工具 | https://www.processon.com/
-PicPick | 屏幕取色工具 | https://picpick.app/zh/
+| 服务 | 默认端口 | 文档地址 |
+| --- | ---: | --- |
+| `mall-admin` | 8080 | `http://localhost:8080/swagger-ui/index.html` |
+| `mall-search` | 8081 | `http://localhost:8081/swagger-ui/index.html` |
+| `mall-portal` | 8085 | `http://localhost:8085/swagger-ui/index.html` |
+| `mall-admin-web` | 5173 | `http://localhost:5173` |
 
-### 开发环境
+## 配置说明
 
-工具 | 版本号 | 下载
-----|----|----
-JDK | 1.8 | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-Mysql | 5.7 | https://www.mysql.com/
-Redis | 3.2 | https://redis.io/download
-Elasticsearch | 6.2.2 | https://www.elastic.co/downloads
-MongoDb | 3.2 | https://www.mongodb.com/download-center
-RabbitMq | 3.7.14 | http://www.rabbitmq.com/download.html
-nginx | 1.10 | http://nginx.org/en/download.html
+### AI 客服
 
-### 搭建步骤
+设置以下变量即可启用 OpenAI 兼容模型：
 
-> 本地环境搭建
+```bash
+EASYGOING_AI_ENABLED=true
+EASYGOING_AI_BASE_URL=https://api.openai.com
+EASYGOING_AI_API_KEY=replace-with-api-key
+EASYGOING_AI_CHAT_MODEL=gpt-4.1-mini
+EASYGOING_AI_EMBEDDING_MODEL=text-embedding-3-small
+```
 
-- 本地安装开发环境中的所有工具并启动(只启动mall-admin,仅需安装mysql)，具体参考[deploy-windows.md](document/reference/deploy-windows.md);
-- 克隆源代码到本地，使用IDEA或Eclipse打开，并完成编译;
-- 在mysql中新建mall数据库，导入document/sql下的mall.sql文件；
-- 启动mall-admin项目：直接运行com.macro.mall.MallAdminApplication的main方法即可，
-  接口文档地址：http://localhost:8080/swagger-ui.html;
-- 启动mall-search项目：直接运行com.macro.mall.search.MallSearchApplication的main方法即可，
-  接口文档地址：http://localhost:8081/swagger-ui.html;
-- 启动mall-portal项目：直接运行com.macro.mall.portal.MallPortalApplication的main方法即可，
-  接口文档地址：http://localhost:8085/swagger-ui.html;
-- 克隆`mall-admin-web`项目，并导入到IDEA中完成编译[传送门](https://github.com/macrozheng/mall-admin-web);
-- 在IDEA命令行中运行命令：npm install,下载相关依赖;
-- 在IDEA命令行中运行命令：npm run dev,访问地址：[http://localhost:8090](http://localhost:8090) 即可打开后台管理系统页面;
-- ELK日志收集系统的搭建：参考[elk.md](document/elk/elk.md)。
+AI 目前提供检索问答原型。知识库上传、文档解析和向量持久化仍应在接入生产模型与向量数据库后完成最终验收。
 
-> docker环境部署
+### 支付渠道
 
-- 在VirtualBox或其他环境中安装CenterOs7.2;
-- 使用maven构建`mall-admin`、`mall-search`、`mall-portal`的docker镜像，参考[docker.md](document/reference/docker.md)中的使用maven构建Docker镜像;
-- docker下环境安装及部署请参考[docker-deploy.md](document/docker/docker-deploy.md)。
+已预留支付宝 Page Pay 与微信支付 Native 的统一配置模型：
 
-## 项目相关文档
+- `EASYGOING_ALIPAY_*`
+- `EASYGOING_WECHAT_PAY_*`
 
-具体详见wiki:[https://github.com/macrozheng/mall/wiki](https://github.com/macrozheng/mall/wiki)
+完整字段及回调安全要求请查看 [payment-setup.md](document/reference/payment-setup.md)。上线前必须完成渠道 SDK 对接、回调验签、订单金额核验与幂等测试。
 
-## 参考资料
+## 安全建议
 
-- [Spring实战（第4版）](https://book.douban.com/subject/26767354/)
-- [Spring Boot实战](https://book.douban.com/subject/26857423/)
-- [Spring Cloud微服务实战](https://book.douban.com/subject/27025912/)
-- [Spring Cloud与Docker微服务架构实战](https://book.douban.com/subject/27028228/)
-- [Spring Data实战](https://book.douban.com/subject/25975186/)
-- [MyBatis从入门到精通](https://book.douban.com/subject/27074809/)
-- [深入浅出MySQL](https://book.douban.com/subject/25817684/)
-- [循序渐进Linux（第2版）](https://book.douban.com/subject/26758194/)
-- [Elasticsearch 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)
-- [Elasticsearch 技术解析与实战](https://book.douban.com/subject/26967826/)
-- [MongoDB实战(第二版)](https://book.douban.com/subject/27061123/)
-- [Kubernetes权威指南](https://book.douban.com/subject/26902153/)
-- [Pro Git](https://git-scm.com/book/zh/v2)
+- 不要提交 `.env`、支付私钥、证书、数据库密码或 AI 密钥。
+- 生产环境只通过密钥管理服务或部署平台注入环境变量。
+- Swagger、Actuator 与 Druid 监控页应限制为内网或运维网络访问。
+- 支付结果仅以服务端验签回调为准，客户端跳转页面不应修改订单状态。
+- 建议为 MySQL、Redis、RabbitMQ、MongoDB、Elasticsearch 分别创建最小权限账号。
 
-## 公众号
+## 当前状态与路线图
 
-mall项目全套学习教程连载中，**关注公众号**第一时间获取。
+| 能力 | 状态 |
+| --- | --- |
+| 后台商品、订单、营销、权限 | 已具备基础实现 |
+| 门户购物车、下单、锁库存、超时取消 | 已具备基础实现 |
+| Redis 限流、JWT、方法级权限 | 已接入 |
+| AI 客服检索问答原型 | 已接入，待生产知识库链路验收 |
+| 支付渠道配置与统一抽象 | 已完成 |
+| 支付宝 / 微信真实交易与回调验签 | 待接入商户资料并完成实现 |
+| 自动化测试、容器编排、CI/CD | 持续完善中 |
 
-![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
+<details>
+<summary><strong>环境搭建参考图（点击展开）</strong></summary>
 
-## 许可证
+### IDE 导入
 
-[Apache License 2.0](https://github.com/macrozheng/mall/blob/master/LICENSE)
+<p align="center">
+  <img src="document/resource/eclipse_import_1.png" alt="IDE 导入步骤一" width="48%" />
+  <img src="document/resource/eclipse_import_2.png" alt="IDE 导入步骤二" width="48%" />
+</p>
 
-Copyright (c) 2018-2019 macrozheng
+### RabbitMQ 安装
+
+<p align="center">
+  <img src="document/resource/rabbitmq_install_1.png" alt="RabbitMQ 安装步骤一" width="24%" />
+  <img src="document/resource/rabbitmq_install_2.png" alt="RabbitMQ 安装步骤二" width="24%" />
+  <img src="document/resource/rabbitmq_install_3.png" alt="RabbitMQ 安装步骤三" width="24%" />
+  <img src="document/resource/rabbitmq_install_4.png" alt="RabbitMQ 安装步骤四" width="24%" />
+</p>
+
+</details>
+
+## License
+
+本项目基于原始开源商城工程进行二次开发与现代化升级。使用前请遵守仓库内 [LICENSE](LICENSE) 及其依赖组件的许可协议。

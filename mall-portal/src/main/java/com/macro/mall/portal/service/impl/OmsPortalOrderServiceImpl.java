@@ -229,6 +229,17 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
 
     @Override
     public CommonResult paySuccess(Long orderId) {
+        UmsMember currentMember = memberService.getCurrentMember();
+        OmsOrder existingOrder = orderMapper.selectByPrimaryKey(orderId);
+        if (existingOrder == null || !Objects.equals(existingOrder.getMemberId(), currentMember.getId())) {
+            return CommonResult.failed("Order does not exist or does not belong to the current member.");
+        }
+        if (Integer.valueOf(1).equals(existingOrder.getStatus())) {
+            return CommonResult.success(null, "Order has already been paid.");
+        }
+        if (!Integer.valueOf(0).equals(existingOrder.getStatus())) {
+            return CommonResult.failed("Only pending-payment orders can be paid.");
+        }
         //修改订单支付状态
         OmsOrder order = new OmsOrder();
         order.setId(orderId);

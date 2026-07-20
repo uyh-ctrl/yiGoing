@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mall 管理服务</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, "Microsoft YaHei", system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; color: #f8fafc;
+      background: radial-gradient(circle at 15% 15%, #3b2a74 0, transparent 32%), radial-gradient(circle at 85% 80%, #075985 0, transparent 35%), #101426; }
+    main { width: min(760px, calc(100% - 40px)); padding: 56px; border: 1px solid #ffffff1f; border-radius: 28px;
+      background: #151a30cc; box-shadow: 0 30px 80px #0006; backdrop-filter: blur(14px); }
+    .tag { display: inline-block; padding: 6px 11px; border-radius: 999px; color: #c4b5fd; background: #7c3aed2b; font-size: 14px; }
+    h1 { margin: 20px 0 12px; font-size: clamp(32px, 6vw, 54px); letter-spacing: -2px; }
+    p { margin: 0; color: #b8c0d9; font-size: 17px; line-height: 1.75; }
+    .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    a { display: inline-flex; padding: 13px 19px; border: 1px solid #ffffff20; border-radius: 12px; color: #eef2ff; text-decoration: none; }
+    a.primary { border: 0; color: white; background: linear-gradient(135deg, #7c3aed, #2563eb); }
+    footer { margin-top: 42px; color: #7f8aa8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="tag">SERVICE ONLINE</span>
+    <h1>Mall 管理服务</h1>
+    <p>后端 API 已启动。当前仓库不含独立的 Vue/React 管理端项目；可通过 OpenAPI 文档调试接口，或连接现有前端。</p>
+    <div class="links">
+      <a class="primary" href="/swagger-ui/index.html">打开 API 文档</a>
+      <a href="/actuator/health">查看服务状态</a>
+    </div>
+    <footer>Spring Boot · Java 21 · OpenAPI 3</footer>
+  </main>
+</body>
+</html>

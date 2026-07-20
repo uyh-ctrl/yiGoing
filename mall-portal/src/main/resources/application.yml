@@ -25,3 +25,23 @@ rabbitmq:
     name:
       cancelOrder: cancelOrderQueue
 
+easygoing:
+  payment:
+    allow-manual-confirmation: ${EASYGOING_PAYMENT_ALLOW_MANUAL_CONFIRMATION:false}
+    alipay:
+      enabled: ${EASYGOING_ALIPAY_ENABLED:false}
+      app-id: ${EASYGOING_ALIPAY_APP_ID:}
+      private-key: ${EASYGOING_ALIPAY_PRIVATE_KEY:}
+      public-key: ${EASYGOING_ALIPAY_PUBLIC_KEY:}
+      notify-url: ${EASYGOING_ALIPAY_NOTIFY_URL:}
+      return-url: ${EASYGOING_ALIPAY_RETURN_URL:}
+    wechat-pay:
+      enabled: ${EASYGOING_WECHAT_PAY_ENABLED:false}
+      app-id: ${EASYGOING_WECHAT_PAY_APP_ID:}
+      mch-id: ${EASYGOING_WECHAT_PAY_MCH_ID:}
+      mch-serial-no: ${EASYGOING_WECHAT_PAY_MCH_SERIAL_NO:}
+      private-key: ${EASYGOING_WECHAT_PAY_PRIVATE_KEY:}
+      api-v3-key: ${EASYGOING_WECHAT_PAY_API_V3_KEY:}
+      platform-certificate: ${EASYGOING_WECHAT_PAY_PLATFORM_CERTIFICATE:}
+      notify-url: ${EASYGOING_WECHAT_PAY_NOTIFY_URL:}
+

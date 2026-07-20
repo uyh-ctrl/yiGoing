@@ -20,8 +20,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -30,9 +28,16 @@
             <artifactId>mall-mbg</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- 保留现有 NativeSearchQuery 查询实现；后续可独立迁移到 Elasticsearch 8 Java Client。 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>4.4.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>7.17.28</version>
         </dependency>
     </dependencies>
 

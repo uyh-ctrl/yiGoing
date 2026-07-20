@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <style>
+    text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;fill:#183B5B}.title{font-size:28px;font-weight:700}.label{font-size:20px;font-weight:700}.sub{font-size:16px;fill:#47647B}.box{stroke-width:2}.line{stroke:#7895AA;stroke-width:3;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#7895AA"/></marker></defs>
+  <rect width="1400" height="820" fill="#F7FAFC"/>
+  <text x="60" y="58" class="title">易Going 商城平台 · 技术架构</text>
+  <rect x="110" y="100" width="1180" height="105" rx="14" fill="#E8F2FB" stroke="#2471A3" class="box"/>
+  <text x="700" y="143" text-anchor="middle" class="label">客户端与管理端</text><text x="700" y="177" text-anchor="middle" class="sub">Vue 3 · TypeScript · Vite · Element Plus</text>
+  <path d="M700 205 V255" class="line"/>
+  <rect x="110" y="260" width="1180" height="138" rx="14" fill="#FFF" stroke="#2471A3" class="box"/>
+  <text x="700" y="307" text-anchor="middle" class="label">Spring Boot 应用层</text>
+  <text x="300" y="352" text-anchor="middle" class="sub">mall-admin：运营、权限、AI、OSS</text>
+  <text x="700" y="352" text-anchor="middle" class="sub">mall-portal：会员、购物车、下单、售后</text>
+  <text x="1080" y="352" text-anchor="middle" class="sub">mall-search：商品检索</text>
+  <path d="M270 398 V465" class="line"/><path d="M500 398 V465" class="line"/><path d="M700 398 V465" class="line"/><path d="M900 398 V465" class="line"/><path d="M1130 398 V465" class="line"/>
+  <g>
+    <rect x="80" y="475" width="230" height="115" rx="12" fill="#FFF5E9" stroke="#E67E22" class="box"/><text x="195" y="520" text-anchor="middle" class="label">MySQL</text><text x="195" y="553" text-anchor="middle" class="sub">交易与运营数据</text>
+    <rect x="350" y="475" width="230" height="115" rx="12" fill="#EEF8F1" stroke="#2E8B57" class="box"/><text x="465" y="520" text-anchor="middle" class="label">Redis</text><text x="465" y="553" text-anchor="middle" class="sub">缓存、限流、订单号</text>
+    <rect x="620" y="475" width="230" height="115" rx="12" fill="#FFF1F4" stroke="#C94C65" class="box"/><text x="735" y="520" text-anchor="middle" class="label">RabbitMQ</text><text x="735" y="553" text-anchor="middle" class="sub">延迟取消订单</text>
+    <rect x="890" y="475" width="230" height="115" rx="12" fill="#F4F0FF" stroke="#7056B7" class="box"/><text x="1005" y="520" text-anchor="middle" class="label">MongoDB</text><text x="1005" y="553" text-anchor="middle" class="sub">浏览、收藏记录</text>
+    <rect x="1160" y="475" width="160" height="115" rx="12" fill="#E9F8FA" stroke="#1B8A9B" class="box"/><text x="1240" y="520" text-anchor="middle" class="label">ES</text><text x="1240" y="553" text-anchor="middle" class="sub">商品检索</text>
+  </g>
+  <path d="M700 590 V650" class="line"/>
+  <rect x="270" y="660" width="380" height="105" rx="14" fill="#FFF" stroke="#2471A3" class="box"/><text x="460" y="705" text-anchor="middle" class="label">外部服务</text><text x="460" y="738" text-anchor="middle" class="sub">OSS · 支付宝 · 微信支付</text>
+  <rect x="750" y="660" width="380" height="105" rx="14" fill="#FFF" stroke="#2471A3" class="box"/><text x="940" y="705" text-anchor="middle" class="label">智能客服</text><text x="940" y="738" text-anchor="middle" class="sub">Spring AI · OpenAI 兼容模型 · VectorStore</text>
+</svg>

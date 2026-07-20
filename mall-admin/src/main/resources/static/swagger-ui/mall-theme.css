@@ -1,0 +1,12 @@
+:root {
+  --primary: #635bff;
+  --ink: #1f2937;
+  --canvas: #f7f8fc;
+}
+
+body.swagger-ui { background: var(--canvas); color: var(--ink); }
+.swagger-ui .topbar { background: linear-gradient(112deg, #171b36, #635bff); padding: 14px 0; }
+.swagger-ui .topbar .download-url-wrapper .select-label select { border-radius: 8px; }
+.swagger-ui .opblock { border-radius: 12px; box-shadow: 0 4px 14px rgb(31 41 55 / 7%); }
+.swagger-ui .btn.authorize { border-color: var(--primary); color: var(--primary); }
+.swagger-ui .info .title small { background: var(--primary); border-radius: 999px; }

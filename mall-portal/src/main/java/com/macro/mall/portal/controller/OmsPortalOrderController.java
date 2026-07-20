@@ -7,6 +7,7 @@ import com.macro.mall.portal.service.OmsPortalOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class OmsPortalOrderController {
     @Autowired
     private OmsPortalOrderService portalOrderService;
+    @Value("${easygoing.payment.allow-manual-confirmation:false}")
+    private boolean allowManualConfirmation;
     @ApiOperation("根据购物车信息生成确认单信息")
     @RequestMapping(value = "/generateConfirmOrder",method = RequestMethod.POST)
     @ResponseBody
@@ -38,6 +41,9 @@ public class OmsPortalOrderController {
     @RequestMapping(value = "/paySuccess",method = RequestMethod.POST)
     @ResponseBody
     public Object paySuccess(@RequestParam Long orderId){
+        if (!allowManualConfirmation) {
+            return CommonResult.failed("Direct payment confirmation is disabled; wait for the signed provider callback.");
+        }
         return portalOrderService.paySuccess(orderId);
     }
 

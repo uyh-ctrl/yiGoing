@@ -1,12 +1,17 @@
 package com.macro.mall.util;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +44,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(signingKey())
                 .compact();
     }
 
@@ -49,10 +54,7 @@ public class JwtTokenUtil {
     private Claims getClaimsFromToken(String token) {
         Claims claims = null;
         try {
-            claims = Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token)
-                    .getBody();
+            claims = Jwts.parser().verifyWith(signingKey()).build().parseSignedClaims(token).getPayload();
         } catch (Exception e) {
             LOGGER.info("JWT格式验证失败:{}",token);
         }
@@ -64,6 +66,15 @@ public class JwtTokenUtil {
      */
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
+    }
+
+    private SecretKey signingKey() {
+        try {
+            return Keys.hmacShaKeyFor(MessageDigest.getInstance("SHA-512")
+                    .digest(secret.getBytes(StandardCharsets.UTF_8)));
+        } catch (Exception exception) {
+            throw new IllegalStateException("Unable to initialize JWT signing key", exception);
+        }
     }
 
     /**
@@ -115,6 +126,19 @@ public class JwtTokenUtil {
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
+    }
+
+    public String generateMemberToken(String username) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAIM_KEY_USERNAME, username);
+        claims.put(CLAIM_KEY_CREATED, new Date());
+        claims.put("accountType", "MEMBER");
+        return generateToken(claims);
+    }
+
+    public String getAccountTypeFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        return claims == null ? null : claims.get("accountType", String.class);
     }
 
     /**

@@ -1,11 +1,16 @@
-# Maven #
+# Local deployment secrets
+.env
+.env.*
+!.env.example
+
+# Runtime artifacts
+logs/
 target/
 
-# IDEA #
-.idea/
-*.iml
-
-# Eclipse #
-.settings/
-.classpath
-.project
+# Frontend local files and build output
+mall-admin-web/node_modules/
+mall-admin-web/dist/
+mall-admin-web/logs/
+mall-admin-web/.env
+mall-admin-web/.env.local
+mall-admin-web/.env.*.local
